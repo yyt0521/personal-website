@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>袁耀庭 — 数字营销与增长专家</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-primary: #000000;
+      --bg-secondary: #0a0a0a;
+      --bg-card: #141414;
+      --bg-card-hover: #1c1c1e;
+      --text-primary: #f5f5f7;
+      --text-secondary: #a1a1a6;
+      --text-tertiary: #6e6e73;
+      --accent: #2997ff;
+      --accent-hover: #0077ed;
+      --gold: #d4a853;
+      --border-color: rgba(255, 255, 255, 0.06);
+      --nav-height: 52px;
+      --section-padding: 120px;
+      --max-width: 1120px;
+      --transition: all 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      z-index: 9999;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 400;
+      transition: var(--transition);
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-mobile-toggle svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: calc(var(--nav-height) + 40px) 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+      filter: saturate(0.6) contrast(1.1);
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 40%, #000 100%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(ellipse, rgba(41, 151, 255, 0.1) 0%, transparent 60%);
+      animation: heroGlow 10s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes heroGlow {
+      0% { transform: translateX(-50%) scale(1); opacity: 0.6; }
+      100% { transform: translateX(-48%) scale(1.1); opacity: 1; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+
+    .hero-eyebrow {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 20px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards 0.3s;
+    }
+
+    .hero-title {
+      font-size: clamp(3.2rem, 8vw, 5.8rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #ffffff 0%, #86868b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s ease forwards 0.5s;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 580px;
+      margin: 0 auto 44px;
+      line-height: 1.6;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards 0.7s;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 32px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 980px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: var(--transition);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards 0.9s;
+    }
+
+    .hero-cta:hover {
+      background: var(--accent-hover);
+      transform: scale(1.03);
+      box-shadow: 0 8px 30px rgba(41, 151, 255, 0.3);
+    }
+
+    .hero-cta svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 64px;
+      margin-top: 80px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards 1.1s;
+    }
+
+    .hero-stat-value {
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #fff 0%, #a1a1a6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-stat-label {
+      font-size: 0.82rem;
+      color: var(--text-tertiary);
+      margin-top: 6px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section Common */
+    .section {
+      padding: var(--section-padding) 24px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .section-dark {
+      background: var(--bg-secondary);
+      max-width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .section-dark .section-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-eyebrow {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .section-desc {
+      font-size: 1.08rem;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    /* About Section */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 60px;
+    }
+
+    .about-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 36px 28px;
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      opacity: 0;
+      transform: translateY(30px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .about-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .about-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+
+    .about-card-icon svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .about-card-icon.blue { background: rgba(41, 151, 255, 0.1); }
+    .about-card-icon.blue svg { stroke: #2997ff; }
+    .about-card-icon.purple { background: rgba(147, 112, 219, 0.1); }
+    .about-card-icon.purple svg { stroke: #9370db; }
+    .about-card-icon.amber { background: rgba(212, 168, 83, 0.1); }
+    .about-card-icon.amber svg { stroke: var(--gold); }
+    .about-card-icon.teal { background: rgba(45, 212, 191, 0.1); }
+    .about-card-icon.teal svg { stroke: #2dd4bf; }
+
+    .about-card-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .about-card-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    /* Experience Timeline */
+    .timeline {
+      margin-top: 60px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent) 0%, rgba(41, 151, 255, 0.08) 100%);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 48px;
+      padding-bottom: 64px;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -5px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 16px rgba(41, 151, 255, 0.35);
+    }
+
+    .timeline-date {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+    }
+
+    .timeline-company {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .timeline-role {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    .timeline-projects {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .timeline-project {
+      background: var(--bg-card);
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      overflow: hidden;
+    }
+
+    .timeline-project:hover {
+      border-color: rgba(41, 151, 255, 0.15);
+      background: var(--bg-card-hover);
+    }
+
+    .timeline-project-img {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .timeline-project-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+      filter: saturate(0.85) brightness(0.9);
+    }
+
+    .timeline-project:hover .timeline-project-img img {
+      transform: scale(1.05);
+      filter: saturate(1) brightness(0.95);
+    }
+
+    .timeline-project-img::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: linear-gradient(0deg, var(--bg-card) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .timeline-project-body {
+      padding: 20px 24px 24px;
+    }
+
+    .timeline-project-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .timeline-project-badge {
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      background: rgba(41, 151, 255, 0.1);
+      color: var(--accent);
+      border-radius: 6px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .timeline-project-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .timeline-awards {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .timeline-award {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      background: linear-gradient(135deg, rgba(212, 168, 83, 0.08), rgba(212, 168, 83, 0.03));
+      border: 1px solid rgba(212, 168, 83, 0.15);
+      border-radius: 10px;
+      font-size: 0.82rem;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .timeline-award svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 60px;
+    }
+
+    .skill-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 32px 28px;
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .skill-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .skill-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .skill-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .skill-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .skill-icon.blue { background: rgba(41, 151, 255, 0.1); }
+    .skill-icon.blue svg { stroke: #2997ff; }
+    .skill-icon.purple { background: rgba(147, 112, 219, 0.1); }
+    .skill-icon.purple svg { stroke: #9370db; }
+    .skill-icon.pink { background: rgba(236, 72, 153, 0.1); }
+    .skill-icon.pink svg { stroke: #ec4899; }
+    .skill-icon.cyan { background: rgba(6, 182, 212, 0.1); }
+    .skill-icon.cyan svg { stroke: #06b6d4; }
+    .skill-icon.green { background: rgba(34, 197, 94, 0.1); }
+    .skill-icon.green svg { stroke: #22c55e; }
+    .skill-icon.amber { background: rgba(212, 168, 83, 0.1); }
+    .skill-icon.amber svg { stroke: var(--gold); }
+
+    .skill-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+      transition: var(--transition);
+    }
+
+    .skill-card:hover .skill-tag {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Education Section */
+    .education-card {
+      margin-top: 60px;
+      background: var(--bg-card);
+      border-radius: 24px;
+      padding: 48px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: var(--transition);
+    }
+
+    .education-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .education-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(41, 151, 255, 0.12), rgba(147, 112, 219, 0.08));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .education-icon svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--accent);
+    }
+
+    .education-info { flex: 1; }
+
+    .education-school {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .education-detail {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+      margin-bottom: 14px;
+    }
+
+    .education-certs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .education-cert {
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+
+    /* Contact Section */
+    .contact {
+      text-align: center;
+      padding: var(--section-padding) 24px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .contact-title {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, #86868b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .contact-desc {
+      font-size: 1.08rem;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+      font-weight: 300;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .contact-link:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(41, 151, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .contact-link svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-tertiary);
+      font-size: 0.82rem;
+    }
+
+    /* Scroll Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      :root {
+        --section-padding: 80px;
+      }
+
+      .nav-links { display: none; }
+      .nav-mobile-toggle { display: block; }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(20px);
+        padding: 20px 24px;
+        gap: 16px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .hero-stats {
+        gap: 32px;
+        flex-wrap: wrap;
+      }
+
+      .hero-stat-value { font-size: 2.2rem; }
+
+      .timeline::before { left: 0; }
+      .timeline-item { padding-left: 32px; }
+
+      .education-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 32px 24px;
+        gap: 20px;
+      }
+
+      .education-certs { justify-content: center; }
+
+      .contact-links { flex-direction: column; align-items: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 2.6rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">袁耀庭</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">关于我</a></li>
+        <li><a href="#experience">工作经历</a></li>
+        <li><a href="#skills">专业技能</a></li>
+        <li><a href="#education">教育背景</a></li>
+        <li><a href="#contact">联系方式</a></li>
+      </ul>
+      <button class="nav-mobile-toggle" id="navToggle" aria-label="菜单">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80" alt="" loading="eager">
+    </div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">数字营销与增长专家</p>
+      <h1 class="hero-title">袁耀庭</h1>
+      <p class="hero-subtitle">13年深耕信息流优化与数字营销，管理过月消耗千万级APP推广项目，擅长全渠道获客策略制定与执行。</p>
+      <a href="#contact" class="hero-cta">
+        与我联系
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-value">13+</div>
+          <div class="hero-stat-label">年行业经验</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">千万级</div>
+          <div class="hero-stat-label">月管理消耗</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">3+</div>
+          <div class="hero-stat-label">核心APP推广</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="fade-in">
+      <p class="section-eyebrow">关于我</p>
+      <h2 class="section-title">以数据驱动增长，<br>以策略赢得市场。</h2>
+      <p class="section-desc">在信息流投放、应用商店推广、ASO/ASA优化及渠道合作等领域积累了丰富的实战经验，持续为业务创造可量化的增长价值。</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-card-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><polyline points="7 10 10 7 13 10 17 6"/></svg>
+        </div>
+        <h3 class="about-card-title">信息流投放专家</h3>
+        <p class="about-card-text">精通抖音、腾讯系等主流信息流平台，具备月消耗千万级别的投放管理经验，擅长制定高效获客策略。</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon purple">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3 class="about-card-title">应用商店增长</h3>
+        <p class="about-card-text">丰富的ASO与ASA优化经验，成功提升多款APP关键词覆盖率、搜索排名及下载转化率。</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
+        <h3 class="about-card-title">全渠道获客</h3>
+        <p class="about-card-text">整合SEM、信息流、应用商店、渠道合作等多维流量入口，构建系统化获客体系，持续压降获客成本。</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon teal">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="about-card-title">跨团队协作</h3>
+        <p class="about-card-text">具备优秀的沟通能力与团队合作精神，能快速适应新环境，高效推动跨部门项目落地。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="section-dark" id="experience">
+    <div class="section-inner">
+      <div class="section" style="padding-top: var(--section-padding); padding-bottom: var(--section-padding);">
+        <div class="fade-in">
+          <p class="section-eyebrow">职业历程</p>
+          <h2 class="section-title">持续创造价值的<br>13年。</h2>
+          <p class="section-desc">从SEM优化师到SEM优化经理，带领多款金融产品实现用户规模与业务增长的双重突破。</p>
+        </div>
+
+        <div class="timeline">
+          <!-- Company 1: 宜信普惠 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2015.07 — 2024.02</div>
+            <h3 class="timeline-company">宜信普惠信息咨询（北京）有限公司</h3>
+            <p class="timeline-role">SEM优化经理</p>
+            <div class="timeline-projects">
+              <div class="timeline-project">
+                <div class="timeline-project-img">
+                  <img src="https://images.unsplash.com/photo-1563986768609-322da13575f2?w=800&q=80" alt="宜享花APP" loading="lazy">
+                </div>
+                <div class="timeline-project-body">
+                  <div class="timeline-project-name">
+                    宜享花 APP
+                    <span class="timeline-project-badge">2020.9 — 2024.2</span>
+                  </div>
+                  <p class="timeline-project-desc">负责宜享花APP线上推广，完成放款KPI并优化用户质量；制定信息流广告计划，提升品牌知名度与用户粘性；主导ASO/ASA优化，提升关键词覆盖率和搜索排名；拓展渠道合作伙伴关系，实现推广效果最大化。</p>
+                </div>
+              </div>
+              <div class="timeline-project">
+                <div class="timeline-project-img">
+                  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="宜人贷借款APP" loading="lazy">
+                </div>
+                <div class="timeline-project-body">
+                  <div class="timeline-project-name">
+                    宜人贷借款 APP
+                    <span class="timeline-project-badge">2018.8 — 2020.9</span>
+                  </div>
+                  <p class="timeline-project-desc">负责宜人贷借款APP线上获客，完成每月放款金额任务；制定高效信息流广告策略，提升借款产品用户认知度；深入分析用户行为，优化ASO策略与搜索排名。</p>
+                </div>
+              </div>
+              <div class="timeline-project">
+                <div class="timeline-project-img">
+                  <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80" alt="指旺财富APP" loading="lazy">
+                </div>
+                <div class="timeline-project-body">
+                  <div class="timeline-project-name">
+                    指旺财富 APP
+                    <span class="timeline-project-badge">2015.7 — 2018.7</span>
+                  </div>
+                  <p class="timeline-project-desc">负责指旺财富APP新客拓展，重点压降获客成本；通过精准投放提升品牌曝光与用户转化率；管理应用商店推广计划，提升APP下载量与活跃度。</p>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-awards">
+              <span class="timeline-award">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                宜享花敏捷组织敏捷之星
+              </span>
+              <span class="timeline-award">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                指旺财富2017年度最佳优化师
+              </span>
+            </div>
+          </div>
+
+          <!-- Company 2: 上海易咨电 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2014.02 — 2015.07</div>
+            <h3 class="timeline-company">上海易咨电文化传播有限公司</h3>
+            <p class="timeline-role">SEM优化师</p>
+            <div class="timeline-projects">
+              <div class="timeline-project">
+                <div class="timeline-project-img">
+                  <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="多客户SEM管理" loading="lazy">
+                </div>
+                <div class="timeline-project-body">
+                  <div class="timeline-project-name">多客户SEM管理</div>
+                  <p class="timeline-project-desc">负责亚洲航空、大众点评、七匹狼、游族游戏等知名客户的SEM优化工作；精通百度搜索、百度网盟、百度品专等产品；策划关键词策略，设计广告创意，优化着陆页用户体验。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Company 3: 北京亿玛在线 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2011.07 — 2013.10</div>
+            <h3 class="timeline-company">北京亿玛在线科技股份有限公司</h3>
+            <p class="timeline-role">SEM优化师</p>
+            <div class="timeline-projects">
+              <div class="timeline-project">
+                <div class="timeline-project-img">
+                  <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" alt="电商SEM优化" loading="lazy">
+                </div>
+                <div class="timeline-project-body">
+                  <div class="timeline-project-name">电商SEM优化</div>
+                  <p class="timeline-project-desc">参与拉手网、中粮我买网、高朋网等电商及团购网站的SEM优化工作；负责关键词挖掘、筛选与分类，广告创意设计，数据分析与策略优化，定期提交优化报告。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="section" id="skills">
+    <div class="fade-in">
+      <p class="section-eyebrow">专业技能</p>
+      <h2 class="section-title">全栈数字营销能力。</h2>
+      <p class="section-desc">覆盖流量获取、转化优化、数据分析全链路，构建完整的增长方法论体系。</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-header">
+          <div class="skill-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <h3 class="skill-name">信息流广告</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">抖音</span>
+          <span class="skill-tag">腾讯广告</span>
+          <span class="skill-tag">巨量引擎</span>
+          <span class="skill-tag">广点通</span>
+          <span class="skill-tag">策略制定</span>
+          <span class="skill-tag">素材优化</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-header">
+          <div class="skill-icon purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </div>
+          <h3 class="skill-name">ASO / ASA</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">关键词优化</span>
+          <span class="skill-tag">搜索排名</span>
+          <span class="skill-tag">覆盖率提升</span>
+          <span class="skill-tag">Apple Search Ads</span>
+          <span class="skill-tag">元数据优化</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-header">
+          <div class="skill-icon pink">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3 class="skill-name">SEM 搜索引擎营销</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">百度搜索</span>
+          <span class="skill-tag">百度网盟</span>
+          <span class="skill-tag">品牌专区</span>
+          <span class="skill-tag">关键词策略</span>
+          <span class="skill-tag">创意设计</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-header">
+          <div class="skill-icon cyan">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3 class="skill-name">数据分析与增长</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">用户行为分析</span>
+          <span class="skill-tag">转化优化</span>
+          <span class="skill-tag">ROI评估</span>
+          <span class="skill-tag">A/B测试</span>
+          <span class="skill-tag">竞品分析</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-header">
+          <div class="skill-icon green">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <h3 class="skill-name">渠道合作管理</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">渠道拓展</span>
+          <span class="skill-tag">合作伙伴关系</span>
+          <span class="skill-tag">流量合作</span>
+          <span class="skill-tag">商务谈判</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-header">
+          <div class="skill-icon amber">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <h3 class="skill-name">应用商店推广</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">App Store</span>
+          <span class="skill-tag">Google Play</span>
+          <span class="skill-tag">国内安卓市场</span>
+          <span class="skill-tag">下载量优化</span>
+          <span class="skill-tag">评分管理</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="section-dark" id="education">
+    <div class="section-inner">
+      <div class="section" style="padding-top: var(--section-padding); padding-bottom: var(--section-padding);">
+        <div class="fade-in">
+          <p class="section-eyebrow">教育背景</p>
+          <h2 class="section-title">扎实的知识基础。</h2>
+        </div>
+        <div class="education-card">
+          <div class="education-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg>
+          </div>
+          <div class="education-info">
+            <h3 class="education-school">安庆师范大学</h3>
+            <p class="education-detail">本科 · 物理学 · 2007 — 2011</p>
+            <div class="education-certs">
+              <span class="education-cert">大学英语四级 (CET-4)</span>
+              <span class="education-cert">大学英语六级 (CET-6)</span>
+              <span class="education-cert">计算机二级 (NCRE-2)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="fade-in">
+      <p class="section-eyebrow" style="text-align: center;">联系我</p>
+      <h2 class="contact-title">期待与您对话。</h2>
+      <p class="contact-desc">如果您正在寻找一位经验丰富的数字营销专家，欢迎随时与我联系。</p>
+      <div class="contact-links">
+        <a href="tel:15810316836" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          158-1031-6836
+        </a>
+        <a href="mailto:yuanyaoting1987@163.com" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          yuanyaoting1987@163.com
+        </a>
+        <span class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          北京
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2024 袁耀庭. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -60px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.dataset.delay || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    document.querySelectorAll('.about-card').forEach((el, i) => {
+      el.dataset.delay = i * 100;
+      observer.observe(el);
+    });
+
+    document.querySelectorAll('.timeline-item').forEach((el, i) => {
+      el.dataset.delay = i * 150;
+      observer.observe(el);
+    });
+
+    document.querySelectorAll('.skill-card').forEach((el, i) => {
+      el.dataset.delay = i * 80;
+      observer.observe(el);
+    });
+
+    document.querySelectorAll('.education-card').forEach(el => observer.observe(el));
+
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    const menuOpenSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    const menuCloseSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navToggle.innerHTML = navLinks.classList.contains('open') ? menuOpenSVG : menuCloseSVG;
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.innerHTML = menuCloseSVG;
+      });
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
