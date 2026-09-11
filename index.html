@@ -165,6 +165,19 @@
       max-width: 800px;
     }
 
+    .hero-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 28px;
+      border: 3px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards 0.15s;
+    }
+
     .hero-eyebrow {
       font-size: 1rem;
       font-weight: 500;
@@ -882,6 +895,7 @@
     </div>
     <div class="hero-glow"></div>
     <div class="hero-content">
+      <img class="hero-avatar" src="avatar_2.png" alt="袁耀庭">
       <p class="hero-eyebrow">数字营销与增长专家</p>
       <h1 class="hero-title">袁耀庭</h1>
       <p class="hero-subtitle">13年深耕信息流优化与数字营销，管理过月消耗千万级APP推广项目，擅长全渠道获客策略制定与执行。</p>
